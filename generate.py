@@ -65,38 +65,20 @@ class TemplateCommand(BaseCommand):
     # The supported URL schemes
     url_schemes = ['http', 'https', 'ftp']
 
-    def handle(self, app_or_project, name, target=None, **options):
+    def handle(self, app_or_project, target=None, **options):
         self.app_or_project = app_or_project
         self.paths_to_remove = []
         self.verbosity = int(options.get('verbosity'))
 
-        # If it's not a valid directory name.
-        if not re.search(r'^[_a-zA-Z]\w*$', name):
-            # Provide a smart error message, depending on the error.
-            if not re.search(r'^[_a-zA-Z]', name):
-                message = ('make sure the name begins '
-                           'with a letter or underscore')
+        top_dir = path.join(os.getcwd(), target)
+        try:
+            os.makedirs(top_dir)
+        except OSError as e:
+            if e.errno == errno.EEXIST:
+                message = "'%s' already exists" % top_dir
             else:
-                message = 'use only numbers, letters and underscores'
-            raise CommandError("%r is not a valid %s name. Please %s." %
-                               (name, app_or_project, message))
-
-        # if some directory is given, make sure it's nicely expanded
-        if target is None:
-            top_dir = path.join(os.getcwd(), name)
-            try:
-                os.makedirs(top_dir)
-            except OSError as e:
-                if e.errno == errno.EEXIST:
-                    message = "'%s' already exists" % top_dir
-                else:
-                    message = e
-                raise CommandError(message)
-        else:
-            top_dir = os.path.abspath(path.expanduser(target))
-            if not os.path.exists(top_dir):
-                raise CommandError("Destination directory '%s' does not "
-                                   "exist, please create it first." % top_dir)
+                message = e
+            raise CommandError(message)
 
         extensions = tuple(
             handle_extensions(options.get('extensions'), ignored=()))
@@ -116,7 +98,6 @@ class TemplateCommand(BaseCommand):
         base_directory = '%s_directory' % app_or_project
 
         context = dict(options, **{
-            base_name: name,
             base_directory: top_dir,
         })
 
@@ -132,7 +113,7 @@ class TemplateCommand(BaseCommand):
         for root, dirs, files in os.walk(template_dir):
 
             path_rest = root[prefix_length:]
-            relative_dir = path_rest.replace(base_name, name)
+            relative_dir = path_rest.replace(base_name, target)
             if relative_dir:
                 target_dir = path.join(top_dir, relative_dir)
                 if not path.exists(target_dir):
@@ -147,8 +128,7 @@ class TemplateCommand(BaseCommand):
                     # Ignore some files as they cause various breakages.
                     continue
                 old_path = path.join(root, filename)
-                new_path = path.join(top_dir, relative_dir,
-                                     filename.replace(base_name, name))
+                new_path = path.join(top_dir, relative_dir, filename)
                 if path.exists(new_path):
                     raise CommandError("%s already exists, overlaying a "
                                        "project or app into an existing "
@@ -323,25 +303,7 @@ class Command(TemplateCommand):
             "project name in the current directory or optionally in the "
             "given directory.")
 
-    def handle(self, project_name='hello', target='hello', *args, **options):
-        if project_name is None:
-            raise CommandError("you must provide a project name")
-
-        # Check that the project_name cannot be imported.
-        try:
-            import_module(project_name)
-        except ImportError:
-            pass
-        else:
-            raise CommandError("%r conflicts with the name of an existing "
-                               "Python module and cannot be used as a "
-                               "project name. Please try another name." %
-                               project_name)
-
-        # Create a random SECRET_KEY hash to put it in the main settings.
-        chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
-        options['secret_key'] = get_random_string(50, chars)
-
+    def handle(self, target=None, *args, **options):
         defaults = {}
         for opt in self.option_list:
             if opt.default is NO_DEFAULT:
@@ -349,5 +311,4 @@ class Command(TemplateCommand):
             else:
                 defaults[opt.dest] = opt.default
         defaults.update(options)
-
-        super(Command, self).handle('project', project_name, target, **defaults)
+        super(Command, self).handle('project', target, **defaults)

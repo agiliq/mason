@@ -19,11 +19,14 @@ from generate import Command
 
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version='Django Buildr 0.1')
+
+    kwargs = docopt(__doc__, version='Django Buildr 0.1')
     templates_dir = 'templates'
-    arguments['template'] = join(abspath(dirname(__file__)), "%s/%s" % (templates_dir, arguments['--template']))
+    kwargs['template'] = join(abspath(dirname(__file__)), "%s/%s" % (templates_dir, kwargs['--template']))
 
     from plugins.south import BuildrPlugin
-    arguments.update(BuildrPlugin().get_context())
+    kwargs.update(BuildrPlugin().get_context())
 
-    Command().execute(**arguments)
+    args = (kwargs['<target>'], )
+
+    Command().execute(*args, **kwargs)
