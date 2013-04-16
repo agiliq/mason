@@ -3,18 +3,27 @@
 """Django Buildr
 
 Usage:
-  django-buildr generate [--base=<default>]
+  django-buildr generate <target> [--template=<default>]
   django-buildr (-h | --help)
   django-buildr --version
 
 Options:
-  -h --help         Show this screen.
-  --base=<default>  Speed in knots [default: 'default'].
-  --version         Show version.
+  --template=<default>  Project template [default: default].
+  -h --help             Show this screen.
+  --version             Show version.
 """
+from os.path import join, abspath, dirname
 from docopt import docopt
+
+from generate import Command
 
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='Django Buildr 0.1')
-    print(arguments)
+    templates_dir = 'templates'
+    arguments['template'] = join(abspath(dirname(__file__)), "%s/%s" % (templates_dir, arguments['--template']))
+
+    from plugins.south import BuildrPlugin
+    arguments.update(BuildrPlugin().get_context())
+
+    Command().execute(**arguments)
