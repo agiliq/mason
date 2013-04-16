@@ -113,7 +113,7 @@ class TemplateCommand(BaseCommand):
         for root, dirs, files in os.walk(template_dir):
 
             path_rest = root[prefix_length:]
-            relative_dir = path_rest.replace(base_name, target)
+            relative_dir = path_rest
             if relative_dir:
                 target_dir = path.join(top_dir, relative_dir)
                 if not path.exists(target_dir):
