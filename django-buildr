@@ -23,6 +23,7 @@ if __name__ == '__main__':
     kwargs = docopt(__doc__, version='Django Buildr 0.1')
     templates_dir = 'templates'
     kwargs['template'] = join(abspath(dirname(__file__)), "%s/%s" % (templates_dir, kwargs['--template']))
+    kwargs['extensions'] = ['py', 'txt']
 
     from plugins.south import BuildrPlugin
     kwargs.update(BuildrPlugin().get_context())

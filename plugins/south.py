@@ -1,6 +1,11 @@
 class BuildrPlugin(object):
 
+    installed_apps = ('south', )
+    dependencies = ('south==0.7.6', )
+
     def get_context(self):
-        return  {'INSTALLED_APPS': (
-            'south',
-        )}
+        context = {
+            'installed_apps': self.installed_apps,
+            'dependencies': self.dependencies,
+        }
+        return context
