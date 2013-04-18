@@ -10,6 +10,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
+    % if databases is UNDEFINED:
     'default': {
         'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '',                      # Or path to database file if using sqlite3.
@@ -19,6 +20,17 @@ DATABASES = {
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
+    % else:
+    'default': {
+        'ENGINE': 'django.db.backends.${databases['default']['ENGINE']}',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '${databases['default']['NAME']}',                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': '${databases['default']['USER']}',
+        'PASSWORD': '${databases['default']['PASSWORD']}',
+        'HOST': '${databases['default']['HOST']}',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '${databases['default']['PORT']}',                      # Set to empty string for default.
+    }
+    % endif
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False

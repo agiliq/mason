@@ -29,6 +29,7 @@ Work in progress...
 
 * South ✓
 * Django Debug Toolbar ✓
+* Database ✓
 * Merchant
 * Parsley
 * Nose
