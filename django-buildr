@@ -28,12 +28,13 @@ if __name__ == '__main__':
     kwargs['template'] = join(abspath(dirname(__file__)), "%s/%s" % (templates_dir, kwargs['--template']))
     kwargs['extensions'] = ['py', 'txt']
 
-    for plugin in PLUGINS:
-        module, klass = plugin.split('.')
+    for plugin_path in PLUGINS:
+        module, klass = plugin_path.split('.')
         PluginClass = getattr(import_module('plugins.%s' % module), klass)
-        should_enable = raw_input('%s :: %s | Enable? (Y/n) ' % (PluginClass.name, PluginClass.description))
-        if should_enable.lower() == 'y':
-            for k, v in PluginClass().get_context().iteritems():
+        plugin = PluginClass()
+        should_enable = plugin.ask()
+        if should_enable:
+            for k, v in plugin.get_context().iteritems():
                 if k in kwargs:
                     kwargs[k].extend(v)
                 else:
