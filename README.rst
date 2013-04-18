@@ -1,8 +1,8 @@
 -------------
-Django-Buildr
+Django-Mason
 -------------
 
-Django-Buildr is a service that allows you to generate django project templates easily.
+Django-Mason is a service that allows you to generate django project templates easily.
 
 -----
 Usage
@@ -10,11 +10,11 @@ Usage
 
 Generate a project template named basic:
 
-    django-buildr generate mytemplate
+    django-mason generate mytemplate
 
 Use the django-skel template
 
-    django-buildr generate mytemplate --template=django-skel
+    django-mason generate mytemplate --template=django-skel
 
 
 Now this template can be used as:
@@ -25,6 +25,12 @@ Now this template can be used as:
 Plugins
 -------
 
-* South
+Work in progress...
 
-More to come...
+* South
+* Django Debug Toolbar
+* Merchant
+* Parsley
+* Nose
+* Fabric
+* Travis
