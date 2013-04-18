@@ -35,7 +35,7 @@ if __name__ == '__main__':
         should_enable = plugin.ask()
         if should_enable:
             for k, v in plugin.get_context().iteritems():
-                if k in kwargs:
+                if k in kwargs and type(v) == list:
                     kwargs[k].extend(v)
                 else:
                     kwargs[k] = v

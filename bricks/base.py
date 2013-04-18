@@ -3,13 +3,17 @@ class BaseBrick(object):
     name = ""
     description = ""
 
-    installed_apps = ()
-    dependencies = ()
+    installed_apps = []
+    dependencies = []
+    middleware_classes = []
+    settings = {}
 
     def get_context(self):
         context = {
             'installed_apps': self.installed_apps,
             'dependencies': self.dependencies,
+            'middleware_classes': self.middleware_classes,
+            'settings': self.settings,
         }
         return context
 

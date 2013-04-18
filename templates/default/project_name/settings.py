@@ -100,6 +100,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    % for klass in middleware_classes:
+    '${klass}',
+    % endfor
 )
 
 ROOT_URLCONF = '{{ project_name }}.urls'
@@ -157,3 +160,7 @@ LOGGING = {
         },
     }
 }
+
+% for key, value in settings.items():
+${key} = ${value}
+% endfor
