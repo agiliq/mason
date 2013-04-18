@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-"""Django Buildr
+"""Django Mason
 
 Usage:
-  django-buildr generate <target> [--template=<default>]
-  django-buildr (-h | --help)
-  django-buildr --version
+  django-mason generate <target> [--template=<default>]
+  django-mason (-h | --help)
+  django-mason --version
 
 Options:
   --template=<default>  Project template [default: default].
@@ -18,19 +18,19 @@ from docopt import docopt
 
 from generate import Command
 
-PLUGINS = ('south.SouthPlugin', 'debug_toolbar.DebugToolbarPlugin')
+PLUGINS = ('south.South', 'debug_toolbar.DebugToolbar')
 
 
 if __name__ == '__main__':
 
-    kwargs = docopt(__doc__, version='Django Buildr 0.1')
+    kwargs = docopt(__doc__, version='Django Mason 0.1')
     templates_dir = 'templates'
     kwargs['template'] = join(abspath(dirname(__file__)), "%s/%s" % (templates_dir, kwargs['--template']))
     kwargs['extensions'] = ['py', 'txt']
 
     for plugin_path in PLUGINS:
         module, klass = plugin_path.split('.')
-        PluginClass = getattr(import_module('plugins.%s' % module), klass)
+        PluginClass = getattr(import_module('bricks.%s' % module), klass)
         plugin = PluginClass()
         should_enable = plugin.ask()
         if should_enable:

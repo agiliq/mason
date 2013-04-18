@@ -1,7 +1,7 @@
-from .base import BuildrPlugin
+from .base import BaseBrick
 
 
-class SouthPlugin(BuildrPlugin):
+class South(BaseBrick):
 
     name = "South"
     description = "Enables south"

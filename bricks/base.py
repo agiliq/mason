@@ -1,4 +1,4 @@
-class BuildrPlugin(object):
+class BaseBrick(object):
 
     name = ""
     description = ""

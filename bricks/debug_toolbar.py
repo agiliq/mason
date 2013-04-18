@@ -1,7 +1,7 @@
-from .base import BuildrPlugin
+from .base import BaseBrick
 
 
-class DebugToolbarPlugin(BuildrPlugin):
+class DebugToolbar(BaseBrick):
 
     name = "Django Debug Toolbar"
     description = "Configures Django Debug Toolbar"
