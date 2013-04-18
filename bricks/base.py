@@ -3,10 +3,10 @@ class BaseBrick(object):
     name = ""
     description = ""
 
-    installed_apps = []
-    dependencies = []
-    middleware_classes = []
-    settings = {}
+    installed_apps = None
+    dependencies = None
+    middleware_classes = None
+    settings = None
 
     def get_context(self):
         context = {
