@@ -18,7 +18,23 @@ from docopt import docopt
 
 from generate import Command
 
-PLUGINS = ('south.South', 'debug_toolbar.DebugToolbar')
+from conf import PLUGINS
+
+
+def get_plugin_class(plugin_path):
+    try:
+        module, classname = plugin_path.rsplit('.', 1)
+    except ValueError:
+        raise Exception('%s isn\'t a middleware module' % plugin_path)
+    try:
+        mod = import_module(module)
+    except ImportError as e:
+        raise Exception('Error importing middleware %s: "%s"' % (module, e))
+    try:
+        klass = getattr(mod, classname)
+    except AttributeError:
+        raise Exception('Middleware module "%s" does not define a "%s" class' % (module, classname))
+    return klass
 
 
 if __name__ == '__main__':
@@ -29,8 +45,7 @@ if __name__ == '__main__':
     kwargs['extensions'] = ['py', 'txt']
 
     for plugin_path in PLUGINS:
-        module, klass = plugin_path.split('.')
-        PluginClass = getattr(import_module('bricks.%s' % module), klass)
+        PluginClass = get_plugin_class(plugin_path)
         plugin = PluginClass()
         should_enable = plugin.ask()
         if should_enable:
