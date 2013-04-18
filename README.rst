@@ -27,8 +27,8 @@ Plugins
 
 Work in progress...
 
-* South
-* Django Debug Toolbar
+* South ✓
+* Django Debug Toolbar ✓
 * Merchant
 * Parsley
 * Nose
