@@ -132,4 +132,5 @@ setup(
     ],
     zip_safe=False,
     tests_require=["Django"],
+    install_requires=read("requirements.txt"),
 )
