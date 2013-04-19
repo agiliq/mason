@@ -93,7 +93,6 @@ class TemplateCommand(BaseCommand):
                               "filenames: %s\n" %
                               (app_or_project, ', '.join(extra_files)))
 
-        base_name = '%s_name' % app_or_project
         base_subdir = '%s_template' % app_or_project
         base_directory = '%s_directory' % app_or_project
 
@@ -106,57 +105,60 @@ class TemplateCommand(BaseCommand):
         if not settings.configured:
             settings.configure()
 
-        template_dir = self.handle_template(options.get('template'),
+        project_template_dir = self.handle_template(options.get('template'),
                                             base_subdir)
-        prefix_length = len(template_dir) + 1
+        plugins = options.get('plugins')
+        plugin_dirs = [plugin.files for plugin in plugins if plugin.files]
+        template_dirs = [project_template_dir] + plugin_dirs
+        for template_dir in template_dirs:
+            for root, dirs, files in os.walk(template_dir):
 
-        for root, dirs, files in os.walk(template_dir):
+                prefix_length = len(template_dir) + 1
+                path_rest = root[prefix_length:]
+                relative_dir = path_rest
+                if relative_dir:
+                    target_dir = path.join(top_dir, relative_dir)
+                    if not path.exists(target_dir):
+                        os.mkdir(target_dir)
 
-            path_rest = root[prefix_length:]
-            relative_dir = path_rest
-            if relative_dir:
-                target_dir = path.join(top_dir, relative_dir)
-                if not path.exists(target_dir):
-                    os.mkdir(target_dir)
+                for dirname in dirs[:]:
+                    if dirname.startswith('.') or dirname == '__pycache__':
+                        dirs.remove(dirname)
 
-            for dirname in dirs[:]:
-                if dirname.startswith('.') or dirname == '__pycache__':
-                    dirs.remove(dirname)
+                for filename in files:
+                    if filename.endswith(('.pyo', '.pyc', '.py.class')):
+                        # Ignore some files as they cause various breakages.
+                        continue
+                    old_path = path.join(root, filename)
+                    new_path = path.join(top_dir, relative_dir, filename)
+                    if path.exists(new_path):
+                        raise CommandError("%s already exists, overlaying a "
+                                        "project or app into an existing "
+                                        "directory won't replace conflicting "
+                                        "files" % new_path)
 
-            for filename in files:
-                if filename.endswith(('.pyo', '.pyc', '.py.class')):
-                    # Ignore some files as they cause various breakages.
-                    continue
-                old_path = path.join(root, filename)
-                new_path = path.join(top_dir, relative_dir, filename)
-                if path.exists(new_path):
-                    raise CommandError("%s already exists, overlaying a "
-                                       "project or app into an existing "
-                                       "directory won't replace conflicting "
-                                       "files" % new_path)
+                    # Only render the Python files, as we don't want to
+                    # accidentally render Django templates files
+                    with open(old_path, 'rb') as template_file:
+                        content = template_file.read()
+                    if filename.endswith(extensions) or filename in extra_files:
+                        content = content.decode('utf-8')
+                        template = Template(content)
+                        content = template.render(**context)
+                        content = content.encode('utf-8')
+                    with open(new_path, 'wb') as new_file:
+                        new_file.write(content)
 
-                # Only render the Python files, as we don't want to
-                # accidentally render Django templates files
-                with open(old_path, 'rb') as template_file:
-                    content = template_file.read()
-                if filename.endswith(extensions) or filename in extra_files:
-                    content = content.decode('utf-8')
-                    template = Template(content)
-                    content = template.render(**context)
-                    content = content.encode('utf-8')
-                with open(new_path, 'wb') as new_file:
-                    new_file.write(content)
-
-                if self.verbosity >= 2:
-                    self.stdout.write("Creating %s\n" % new_path)
-                try:
-                    shutil.copymode(old_path, new_path)
-                    self.make_writeable(new_path)
-                except OSError:
-                    self.stderr.write(
-                        "Notice: Couldn't set permission bits on %s. You're "
-                        "probably using an uncommon filesystem setup. No "
-                        "problem." % new_path, self.style.NOTICE)
+                    if self.verbosity >= 2:
+                        self.stdout.write("Creating %s\n" % new_path)
+                    try:
+                        shutil.copymode(old_path, new_path)
+                        self.make_writeable(new_path)
+                    except OSError:
+                        self.stderr.write(
+                            "Notice: Couldn't set permission bits on %s. You're "
+                            "probably using an uncommon filesystem setup. No "
+                            "problem." % new_path, self.style.NOTICE)
 
         if self.paths_to_remove:
             if self.verbosity >= 2:

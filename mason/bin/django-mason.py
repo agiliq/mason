@@ -43,12 +43,14 @@ if __name__ == '__main__':
     templates_dir = join(abspath(dirname(__file__)), '..', 'templates', kwargs['--template'])
     kwargs['template'] = templates_dir
     kwargs['extensions'] = ['py', 'txt']
+    kwargs['plugins'] = []
 
     for plugin_path in PLUGINS:
         PluginClass = get_plugin_class(plugin_path)
         plugin = PluginClass()
         should_enable = plugin.ask()
         if should_enable:
+            kwargs['plugins'].append(plugin)
             for k, v in plugin.get_context().iteritems():
                 if v is not None:
                     if k in kwargs and type(v) == list:

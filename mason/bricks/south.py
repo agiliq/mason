@@ -1,4 +1,4 @@
-from .base import BaseBrick
+from mason.bricks.base import BaseBrick
 
 
 class South(BaseBrick):

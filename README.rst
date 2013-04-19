@@ -27,11 +27,11 @@ Plugins
 
 Work in progress...
 
+* Database ✓
 * South ✓
 * Django Debug Toolbar ✓
-* Database ✓
 * Merchant
 * Parsley
 * Nose
-* Fabric
+* Fabric ✓
 * Travis
