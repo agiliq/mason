@@ -30,8 +30,9 @@ Work in progress...
 * Database ✓
 * South ✓
 * Django Debug Toolbar ✓
+* Fabric ✓
+* Sentry ✓
+* Travis
 * Merchant
 * Parsley
 * Nose
-* Fabric ✓
-* Travis
