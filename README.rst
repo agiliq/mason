@@ -17,8 +17,8 @@ Now this template can be used as:
     django-admin startproject myproject --template=mytemplate
 
 
-Plugins
--------
+Plugins aka Bricks
+---------------------
 
 Work in progress...
 
@@ -31,3 +31,9 @@ Work in progress...
 * Merchant
 * Parsley
 * Nose
+
+Writing new Bricks
+-------------------
+
+To new apps, you need to create a new class which extends from mason.bricks.base.BaseBrick. See the existing apps for options which can be overriden here.
+
