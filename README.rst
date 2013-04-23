@@ -8,14 +8,9 @@ Django-Mason is a service that allows you to generate django project templates e
 Usage
 -----
 
-Generate a project template named basic:
+Generate a project template named mytemplate:
 
     django-mason generate mytemplate
-
-Use the django-skel template
-
-    django-mason generate mytemplate --template=django-skel
-
 
 Now this template can be used as:
 
