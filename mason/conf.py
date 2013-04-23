@@ -4,4 +4,5 @@ PLUGINS = (
     'mason.bricks.debug_toolbar.DebugToolbar',
     'mason.bricks.fabfile.fabfile.Fabfile',
     'mason.bricks.sentry.Sentry',
+    'mason.bricks.celery.Celery',
 )
