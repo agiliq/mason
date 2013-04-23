@@ -16,7 +16,7 @@ from importlib import import_module
 from os.path import join, abspath, dirname
 from docopt import docopt
 
-from mason.generate import Command
+from mason import generate
 
 from mason.conf import PLUGINS
 
@@ -40,7 +40,7 @@ def get_plugin_class(plugin_path):
 if __name__ == '__main__':
 
     kwargs = docopt(__doc__, version='Django Mason 0.1')
-    templates_dir = join(abspath(dirname(__file__)), '..', 'templates', kwargs['--template'])
+    templates_dir = join(abspath(dirname(generate.__file__)), 'templates', kwargs['--template'])
     kwargs['template'] = templates_dir
     kwargs['extensions'] = ['py', 'txt']
     kwargs['plugins'] = []
@@ -60,4 +60,4 @@ if __name__ == '__main__':
 
     args = (kwargs['<target>'], )
 
-    Command().execute(*args, **kwargs)
+    generate.Command().execute(*args, **kwargs)
