@@ -7,3 +7,8 @@ class Celery(BaseBrick):
     description = "Configures django-celery"
     installed_apps = ['djcelery', ]
     dependencies = ['django-celery==3.0.17', ]
+
+    settings = {
+            'BROKER_URL': '',
+            'celery_imports': (),
+    }
