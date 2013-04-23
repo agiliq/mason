@@ -31,6 +31,21 @@ Work in progress...
 * Merchant
 * Parsley
 * Nose
+* Piston
+* Tastypie
+* Rest-framework
+* Userena
+* Guardian
+* Django-CMS
+* Fein-CMS
+* Mezzanine
+* Disqus
+* Django-Extensions
+* Grapelli
+* uni-form
+* crispy-forms
+
+
 
 Writing new Bricks
 -------------------
