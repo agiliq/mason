@@ -5,4 +5,5 @@ PLUGINS = (
     'mason.bricks.fabfile.fabfile.Fabfile',
     'mason.bricks.sentry.Sentry',
     'mason.bricks.parsley.Parsley',
+    'mason.bricks.travis.travis.Travis',
 )

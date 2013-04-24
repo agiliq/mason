@@ -42,7 +42,7 @@ if __name__ == '__main__':
     kwargs = docopt(__doc__, version='Django Mason 0.1')
     templates_dir = join(abspath(dirname(generate.__file__)), 'templates', kwargs['--template'])
     kwargs['template'] = templates_dir
-    kwargs['extensions'] = ['py', 'txt']
+    kwargs['extensions'] = ['py', 'txt', 'yml']
     kwargs['plugins'] = []
 
     for plugin_path in PLUGINS:
