@@ -7,4 +7,4 @@ class Parsley(BaseBrick):
     description = "Enables Parsley"
 
     installed_apps = ['parsley', ]
-    dependencies = ['parsley', ]
+    dependencies = ['django-parsley', ]
