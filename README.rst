@@ -2,6 +2,11 @@
 Django-Mason
 -------------
 
+|TravisCI|_
+
+.. |TravisCI| image:: https://api.travis-ci.org/agiliq/mason.png?branch=master
+.. _TravisCI: https://travis-ci.org/agiliq/mason
+
 Django-Mason is a service that allows you to generate django project templates
 easily.
 
