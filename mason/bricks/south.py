@@ -7,4 +7,4 @@ class South(BaseBrick):
     description = "Enables south"
 
     installed_apps = ['south', ]
-    dependencies = ['south==0.7.6', ]
+    dependencies = ['south', ]

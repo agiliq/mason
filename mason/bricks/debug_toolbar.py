@@ -7,7 +7,7 @@ class DebugToolbar(BaseBrick):
     description = "Configures Django Debug Toolbar"
 
     installed_apps = ['debug_toolbar', ]
-    dependencies = ['django-debug-toolbar==0.9.4', ]
+    dependencies = ['django-debug-toolbar', ]
     middleware_classes = ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 
     settings = {

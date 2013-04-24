@@ -7,4 +7,7 @@ class Fabfile(BaseBrick):
 
     name = "Fabfile"
     description = "Adds a fabfile to your project root"
+
+    dependencies = ['Fabric']
+
     files = join(abspath(dirname(__file__)), 'files')
