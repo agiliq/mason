@@ -27,9 +27,9 @@ Work in progress...
 * Django Debug Toolbar ✓
 * Fabric ✓
 * Sentry ✓
+* Parsley ✓
 * Travis
 * Merchant
-* Parsley
 * Nose
 * Piston
 * Tastypie
