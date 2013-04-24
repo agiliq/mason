@@ -2,7 +2,8 @@
 Django-Mason
 -------------
 
-Django-Mason is a service that allows you to generate django project templates easily.
+Django-Mason is a service that allows you to generate django project templates
+easily.
 
 -----
 Usage
@@ -50,5 +51,6 @@ Work in progress...
 Writing new Bricks
 -------------------
 
-To new apps, you need to create a new class which extends from mason.bricks.base.BaseBrick. See the existing apps for options which can be overriden here.
-
+To new apps, you need to create a new class which extends from
+`mason.bricks.base.BaseBrick`. See the existing apps for options which can be
+overriden here.
