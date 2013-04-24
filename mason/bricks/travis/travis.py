@@ -18,8 +18,12 @@ class Travis(BaseBrick):
         if not answer or answer.lower() == 'y':
             print "Please enter travis CI details"
             print "\n"
-            self.travis['script'] = raw_input("script - Command to run the tests [python manage.py test]: ")
-            self.travis['install'] = raw_input("install - Command to install dependencies [pip install -r requirements]: ")
+            script = raw_input("script - Command to run the tests [python manage.py test]: ")
+            if script:
+                self.travis['script'] = script
+            install = raw_input("install - Command to install dependencies [pip install -r requirements]: ")
+            if install:
+                self.travis['install'] = install
             return True
         return False
 

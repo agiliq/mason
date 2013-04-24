@@ -34,7 +34,7 @@ Work in progress...
 * Fabric ✓
 * Sentry ✓
 * Parsley ✓
-* Travis
+* Travis ✓
 * Merchant
 * Nose
 * Piston
