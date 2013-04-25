@@ -7,4 +7,5 @@ PLUGINS = (
     'mason.bricks.parsley.Parsley',
     'mason.bricks.travis.travis.Travis',
     'mason.bricks.crispy_forms.CrispyForms',
+    'mason.bricks.grappelli.Grappelli',
 )
