@@ -44,6 +44,7 @@ if __name__ == '__main__':
     kwargs['template'] = templates_dir
     kwargs['extensions'] = ['py', 'txt', 'yml']
     kwargs['plugins'] = []
+    kwargs['plugin_names'] = []
 
     for plugin_path in PLUGINS:
         PluginClass = get_plugin_class(plugin_path)
@@ -51,6 +52,7 @@ if __name__ == '__main__':
         should_enable = plugin.ask()
         if should_enable:
             kwargs['plugins'].append(plugin)
+            kwargs['plugin_names'].append(plugin.name)
             for k, v in plugin.get_context().iteritems():
                 if v is not None:
                     if k in kwargs and type(v) == list:

@@ -4,6 +4,11 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
+% if 'Admin' in plugin_names:
+from django.contrib import admin
+admin.autodiscover()
+% endif
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', '{{ project_name }}.views.home', name='home'),
@@ -14,4 +19,10 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
+
+    % if not urls is UNDEFINED:
+    % for url in urls:
+    ${url},
+    % endfor
+    % endif
 )
