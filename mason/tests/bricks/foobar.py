@@ -11,3 +11,4 @@ class FooBarBrick(BaseBrick):
     middleware_classes = ["foobar.middleware.FooBar"]
     settings = {"FOO": "bar"}
     files = "foobar_files"
+    urls = ["url(r'^admin/', include(admin.site.urls))"]
