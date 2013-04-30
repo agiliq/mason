@@ -29,6 +29,7 @@ Plugins aka Bricks
 Work in progress...
 
 * Database ✓
+* Admin ✓
 * South ✓
 * Django Debug Toolbar ✓
 * Fabric ✓

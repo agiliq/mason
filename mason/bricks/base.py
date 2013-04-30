@@ -11,6 +11,7 @@ class BaseBrick(object):
     middleware_classes = None
     settings = None
     files = None
+    urls = None
 
     def get_context(self):
         context = {
@@ -18,6 +19,7 @@ class BaseBrick(object):
             'dependencies': self.dependencies,
             'middleware_classes': self.middleware_classes,
             'settings': self.settings,
+            'urls': self.urls,
         }
         return context
 
