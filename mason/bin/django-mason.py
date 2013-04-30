@@ -4,6 +4,7 @@
 
 Usage:
   django-mason generate <target> [--template=<default>]
+  django-mason startproject <target> [--template=<default>]
   django-mason (-h | --help)
   django-mason --version
 
@@ -16,7 +17,7 @@ from importlib import import_module
 from os.path import join, abspath, dirname
 from docopt import docopt
 
-from mason import generate
+from mason import generate, startproject
 
 from mason.conf import PLUGINS
 
@@ -60,6 +61,11 @@ if __name__ == '__main__':
                     else:
                         kwargs[k] = v
 
-    args = (kwargs['<target>'], )
-
+    target = "%s_template" % kwargs['<target>']
+    args = (target, )
     generate.Command().execute(*args, **kwargs)
+
+    if 'startproject' in kwargs:
+        args = kwargs['<target>']
+        kwargs = {'template': target}
+        startproject.Command().execute(args, **kwargs)
