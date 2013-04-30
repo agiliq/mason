@@ -4,7 +4,7 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-% if 'Admin' in plugin_names:
+% if 'Admin' in plugin_names or 'Django Grappelli' in plugin_names:
 from django.contrib import admin
 admin.autodiscover()
 % endif
