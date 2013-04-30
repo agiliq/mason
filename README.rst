@@ -29,6 +29,7 @@ Plugins aka Bricks
 Work in progress...
 
 * Database ✓
+* Admin ✓
 * South ✓
 * Django Debug Toolbar ✓
 * Fabric ✓
@@ -47,7 +48,7 @@ Work in progress...
 * Mezzanine
 * Disqus
 * Django-Extensions
-* Grapelli
+* Grapelli ✓
 * uni-form
 * crispy-forms
 
