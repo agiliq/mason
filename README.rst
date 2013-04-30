@@ -46,7 +46,7 @@ Work in progress...
 * Django-CMS
 * Fein-CMS
 * Mezzanine
-* Disqus
+* Disqus ✓
 * Django-Extensions
 * Grapelli ✓
 * uni-form
