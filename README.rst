@@ -22,6 +22,9 @@ Now this template can be used as:
 
     django-admin startproject myproject --template=mytemplate
 
+To do this in one step:
+
+    django-mason startproject myproject
 
 Plugins aka Bricks
 ---------------------
@@ -50,7 +53,7 @@ Work in progress...
 * Django-Extensions
 * Grapelli ✓
 * uni-form
-* crispy-forms
+* crispy-forms ✓
 
 
 
