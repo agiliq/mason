@@ -48,7 +48,7 @@ Work in progress...
 * Mezzanine
 * Disqus
 * Django-Extensions
-* Grapelli
+* Grapelli ✓
 * uni-form
 * crispy-forms
 
