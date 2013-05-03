@@ -10,6 +10,7 @@ class Guardian(BaseBrick):
     dependencies = ['django-guardian', ]
 
     settings = {
+        'ANONYMOUS_USER_ID': -1,
         'AUTHENTICATION_BACKENDS': (
             'django.contrib.auth.backends.ModelBackend', # default
             'guardian.backends.ObjectPermissionBackend',
