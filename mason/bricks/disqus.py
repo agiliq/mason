@@ -14,7 +14,7 @@ class Disqus(BaseBrick):
     }
 
     def ask(self):
-        answer = raw_input("Do you want to enter disqus API key now? (Y/n)")
+        answer = raw_input('%s :: %s | Enable? (Y/n) ' % (self.name, self.description))
         if not answer or answer.lower() == 'y':
             print "Please enter Disqus API key\n"
             self.settings['DISQUS_API_KEY'] = raw_input("API KEY: ")
