@@ -112,9 +112,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    % if middleware_classes is not UNDEFINED:
     % for klass in middleware_classes:
     '${klass}',
     % endfor
+    % endif
 )
 
 ROOT_URLCONF = '{{ project_name }}.urls'
@@ -139,9 +141,11 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    % if installed_apps is not UNDEFINED:
     % for app in installed_apps:
     '${app}',
     % endfor
+    % endif
 )
 
 # A sample logging configuration. The only tangible logging
@@ -173,6 +177,8 @@ LOGGING = {
     }
 }
 
+% if settings is not UNDEFINED and settings:
 % for key, value in settings.items():
 ${key} = ${value}
 % endfor
+% endif

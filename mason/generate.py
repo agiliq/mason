@@ -17,8 +17,10 @@ from optparse import make_option
 from optparse import OptionParser, NO_DEFAULT
 from os import path
 
-import django
 from mako.template import Template
+from mako import exceptions
+
+import django
 from django.utils import archive
 from django.utils._os import rmtree_errorhandler
 from django.utils.crypto import get_random_string
@@ -144,7 +146,10 @@ class TemplateCommand(BaseCommand):
                     if filename.endswith(extensions) or filename in extra_files:
                         content = content.decode('utf-8')
                         template = Template(content)
-                        content = template.render(**context)
+                        try:
+                            content = template.render(**context)
+                        except:
+                            print exceptions.text_error_template().render()
                         content = content.encode('utf-8')
                     with open(new_path, 'wb') as new_file:
                         new_file.write(content)
