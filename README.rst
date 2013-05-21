@@ -23,7 +23,7 @@ configures them for you so you can start your project easy and clean.
 Install
 --------
 
-pip install -e git+git://github.com/agiliq/mason.git#egg=django-mason
+``pip install -e git+git://github.com/agiliq/mason.git#egg=django-mason``
 
 -----
 Usage
