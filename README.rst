@@ -19,21 +19,27 @@ Every project is different, so why start a new project with the same template?
 ``django-mason.py`` lets you pick and choose the components you need and
 configures them for you so you can start your project easy and clean.
 
+--------
+Install
+--------
+
+pip install -e git+git://github.com/agiliq/mason.git#egg=django-mason
+
 -----
 Usage
 -----
 
 Generate a project template named mytemplate:
 
-    django-mason generate mytemplate
+``django-mason.py generate mytemplate``
 
 Now this template can be used as:
 
-    django-admin startproject myproject --template=mytemplate
+``django-admin.py startproject myproject --template=mytemplate``
 
 To do this in one step:
 
-    django-mason startproject myproject
+``django-mason.py startproject myproject``
 
 Plugins aka Bricks
 ---------------------
