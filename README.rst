@@ -64,11 +64,25 @@ Work in progress...
 * uni-form
 * crispy-forms ✓
 
-
-
 Writing new Bricks
 -------------------
 
 To new apps, you need to create a new class which extends from
-`mason.bricks.base.BaseBrick`. See the existing apps for options which can be
+``mason.bricks.base.BaseBrick``. See the existing apps for options which can be
 overriden here.
+
+-------
+Roadmap
+-------
+
+* Maybe have a web UI
+
+------------
+Inspiration
+------------
+
+* Yeoman_
+* initializr_
+
+.. _Yeoman: http://yeoman.io/
+.. _initializr: http://www.initializr.com/
