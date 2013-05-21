@@ -10,6 +10,15 @@ Django-Mason
 Django-Mason is a service that allows you to generate django project templates
 easily.
 
+---
+Why
+---
+
+Every project is different, so why start a new project with the same template?
+
+``django-mason.py`` lets you pick and choose the components you need and
+configures them for you so you can start your project easy and clean.
+
 -----
 Usage
 -----
