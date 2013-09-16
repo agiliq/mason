@@ -179,6 +179,10 @@ LOGGING = {
 
 % if settings is not UNDEFINED and settings:
 % for key, value in settings.items():
+% if key == "_RAW":
+${value}
+% else:
 ${key} = ${value}
+% endif
 % endfor
 % endif
