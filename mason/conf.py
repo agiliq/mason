@@ -12,4 +12,5 @@ PLUGINS = (
     'mason.bricks.crispy_forms.CrispyForms',
     'mason.bricks.disqus.Disqus',
     'mason.bricks.celery.Celery',
+    'mason.bricks.nose.Nose',
 )
