@@ -13,4 +13,5 @@ PLUGINS = (
     'mason.bricks.disqus.Disqus',
     'mason.bricks.celery.Celery',
     'mason.bricks.nose.Nose',
+    'mason.bricks.extensions.Extensions',
 )
